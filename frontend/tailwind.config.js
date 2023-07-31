@@ -6,8 +6,21 @@ module.exports = {
       colors: {
         'classic-gray': '#e3e0d7',
         wheat: '#cdc3b7',
-        'dark-gray': '#7a8076'
+        coffee: '#624311'
+      },
+      dropShadow: {
+        md: '0 3px 3px rgba(0, 0, 0, 0.651)',
+        lg: '0 6px 6px rgba(0, 0, 0, 0.651)'
+      },
+      fontFamily: {
+        playfair: 'Playfair Display',
+        serif: 'serif'
       }
+    },
+    screens: {
+      xs: '480px',
+      sm: '640px',
+      md: '768px'
     }
   },
   plugins: []
