@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { HiMenuAlt1, HiOutlineX } from 'react-icons/hi';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const MenuIcon = ({ isOpen, onClick }) => {
   return (
@@ -14,20 +14,20 @@ const MenuIcon = ({ isOpen, onClick }) => {
 const NavItem = ({ to, children, onClick }) => {
   return (
     <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
-      <NavLink
+      <Link
         to={to}
         className='inline-block hover:scale-110 hover:font-bold'
         onClick={onClick}
       >
         {children}
-      </NavLink>
+      </Link>
     </div>
   );
 };
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -50,13 +50,18 @@ const Header = () => {
           {loggedIn ? (
             <>
               <NavItem to='/' onClick={closeMenu} children={'Home'} />
-              <NavItem to='/NewPost' onClick={closeMenu} children={'Post'} />
-              <NavItem to='/Logout' onClick={closeMenu} children={'Logout'} />
+              <NavItem to='/post' onClick={closeMenu} children={'Post'} />
+              <NavItem to='/logout' onClick={closeMenu} children={'Logout'} />
             </>
           ) : (
             <>
               <NavItem to='/' onClick={closeMenu} children={'Home'} />
-              <NavItem to='/Login' onClick={closeMenu} children={'Login'} />
+              <NavItem to='/login' onClick={closeMenu} children={'Login'} />
+              <NavItem
+                to='/register'
+                onClick={closeMenu}
+                children={'Register'}
+              />
             </>
           )}
         </div>
