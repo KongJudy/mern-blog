@@ -16,13 +16,13 @@ const InputItem = ({ children, type, value, onChange }) => {
 };
 
 const Login = () => {
-  const [user, setUser] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
 
-    console.log(user, password);
+    console.log(username, password);
   };
 
   return (
@@ -36,8 +36,8 @@ const Login = () => {
             <InputItem
               children='Username:'
               type='user'
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <InputItem
               children='Password:'
@@ -47,7 +47,7 @@ const Login = () => {
             />
             <div className='text-right md:mr-3'>
               <button className='bg-white px-4 py-2 rounded hover:font-bold tracking-wider shadow-md hover:drop-shadow-sm'>
-                Register
+                Login
               </button>
               <div className='pt-4'>
                 <span className='text-sm'>

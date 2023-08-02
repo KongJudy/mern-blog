@@ -16,13 +16,13 @@ const InputItem = ({ children, type, value, onChange }) => {
 };
 
 const Register = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
 
-    console.log(email, password);
+    console.log(username, password);
   };
 
   return (
@@ -34,10 +34,10 @@ const Register = () => {
               <span className='text-3xl font-bold'>Register</span>
             </div>
             <InputItem
-              children='Email:'
-              type='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              children='Username:'
+              type='username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <InputItem
               children='Password:'
