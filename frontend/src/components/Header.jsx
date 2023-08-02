@@ -34,7 +34,7 @@ const Header = () => {
   };
 
   return (
-    <nav className='w-full fixed top-0 bg-wheat flex items-center justify-between flex-wrap p-6'>
+    <nav className='w-full fixed z-50 top-0 bg-wheat flex items-center justify-between flex-wrap p-6 lg:px-40'>
       <div className='flex md:text-center justify-center flex-shrink-0'>
         <span className='font-playfair font-bold text-2xl'>Blogger</span>
       </div>
@@ -50,7 +50,11 @@ const Header = () => {
           {loggedIn ? (
             <>
               <NavItem to='/' onClick={closeMenu} children={'Home'} />
-              <NavItem to='/post' onClick={closeMenu} children={'Post'} />
+              <NavItem
+                to='/create'
+                onClick={closeMenu}
+                children={'Create new post'}
+              />
               <NavItem to='/logout' onClick={closeMenu} children={'Logout'} />
             </>
           ) : (

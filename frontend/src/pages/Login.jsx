@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 const InputItem = ({ children, type, value, onChange }) => {
   return (
     <div className='text-left md:text-right'>
-      <label className='block my-2 ml-2 md:inline-block font-bold'>
-        {children}
-      </label>
+      <label className='block my-2 md:inline-block font-bold'>{children}</label>
       <input
         className='mb-4 p-2 md:mx-3 rounded h-10 w-72 md:w-80 hover:drop-shadow-sm'
         type={type}
@@ -48,13 +46,16 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className='text-right md:mr-3'>
-              <button className='bg-white px-4 py-2 rounded hover:font-bold tracking-wider'>
+              <button className='bg-white px-4 py-2 rounded hover:font-bold tracking-wider shadow-md hover:drop-shadow-sm'>
                 Register
               </button>
               <div className='pt-4'>
                 <span className='text-sm'>
                   Create an Account? Click{' '}
-                  <Link to='/register' className='font-bold'>
+                  <Link
+                    to='/register'
+                    className='font-semibold hover:font-bold'
+                  >
                     Register
                   </Link>
                 </span>

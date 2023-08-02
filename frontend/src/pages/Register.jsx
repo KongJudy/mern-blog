@@ -46,13 +46,13 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className='text-right md:mr-3'>
-              <button className='bg-white px-4 py-2 rounded hover:font-bold tracking-wider'>
+              <button className='bg-white px-4 py-2 rounded hover:font-bold tracking-wider shadow-md hover:drop-shadow-sm'>
                 Register
               </button>
               <div className='pt-4'>
                 <span className='text-sm'>
                   Already a member? Click{' '}
-                  <Link to='/login' className='font-bold'>
+                  <Link to='/login' className='font-semibold hover:font-bold'>
                     Login
                   </Link>
                 </span>
