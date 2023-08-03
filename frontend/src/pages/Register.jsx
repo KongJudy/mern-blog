@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const InputItem = ({ children, type, value, onChange }) => {
   return (
@@ -19,10 +20,12 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmitForm = async (e) => {
+  const handleSubmitForm = (e) => {
     e.preventDefault();
-
-    console.log(username, password);
+    axios
+      .post('', { username, password })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
 
   return (
