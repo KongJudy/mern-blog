@@ -1,14 +1,14 @@
 const Post = () => {
   return (
-    <div className='mb-8 col-span-3 md:mx-8'>
-      <div className='lg:max-w-[700px] '>
+    <div className='mb-6 col-span-3 md:mx-8'>
+      <div className='max-w-[640px] md:max-w-[700px] '>
         <img
           src='https://images.unsplash.com/photo-1547394765-185e1e68f34e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
           className='rounded drop-shadow-md object-scale-down'
           alt='keyboard'
         />
       </div>
-      <div className='mt-4 lg:max-w-[700px]'>
+      <div className='mt-4 max-w-[640px] md:max-w-[700px]'>
         <span className='sm:text-2xl text-lg font-bold'>
           Cursus mattis morastie a adipiscing commodo
         </span>

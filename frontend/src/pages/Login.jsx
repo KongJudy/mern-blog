@@ -7,7 +7,7 @@ const InputItem = ({ children, type, value, onChange }) => {
     <div className='text-left md:text-right'>
       <label className='block my-2 md:inline-block font-bold'>{children}</label>
       <input
-        className='mb-4 p-2 md:mx-3 rounded h-10 w-72 md:w-80 hover:drop-shadow-sm'
+        className='mb-4 p-2 md:mx-3 rounded h-10 w-full md:w-80 hover:drop-shadow-sm'
         type={type}
         value={value}
         onChange={onChange}

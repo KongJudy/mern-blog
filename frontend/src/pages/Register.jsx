@@ -7,7 +7,7 @@ const InputItem = ({ children, type, value, onChange }) => {
     <div className='text-left md:text-right'>
       <label className='block my-2 md:inline-block font-bold'>{children}</label>
       <input
-        className='mb-4 p-2 md:mx-3 rounded h-10 w-72 md:w-80 hover:drop-shadow-sm'
+        className='mb-4 p-2 md:mx-3 rounded h-10 w-full md:w-80 hover:drop-shadow-sm'
         type={type}
         value={value}
         onChange={onChange}
@@ -17,25 +17,32 @@ const InputItem = ({ children, type, value, onChange }) => {
 };
 
 const Register = () => {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
     axios
-      .post('', { username, password })
+      .post('', { username, email, password })
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
   };
 
   return (
-    <div className='w-full mx-auto p-6'>
+    <div className='w-full mx-auto pt-6'>
       <div className='mt-40 flex justify-center'>
         <div className='md:p-8 md:rounded md:shadow-2xl'>
           <form onSubmit={() => handleSubmitForm}>
             <div className='text-center mb-12'>
               <span className='text-3xl font-bold'>Register</span>
             </div>
+            <InputItem
+              children='Email:'
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <InputItem
               children='Username:'
               type='username'
