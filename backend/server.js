@@ -1,7 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
+
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
+const authRoute = require('./routes/AuthRoute');
+
 const { PORT, MONGO_URL } = process.env;
 
 const app = express();
@@ -27,4 +32,6 @@ app.use(
   })
 );
 
+app.use(cookieParser());
 app.use(express.json());
+app.use('/', authRoute);
