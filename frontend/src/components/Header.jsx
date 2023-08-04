@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { HiMenuAlt1, HiOutlineX } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 const MenuIcon = ({ isOpen, onClick }) => {
   return (
@@ -11,63 +13,112 @@ const MenuIcon = ({ isOpen, onClick }) => {
   );
 };
 
-const NavItem = ({ to, children, onClick }) => {
-  return (
-    <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
-      <Link
-        to={to}
-        className='inline-block hover:scale-110 hover:font-bold'
-        onClick={onClick}
-      >
-        {children}
-      </Link>
-    </div>
-  );
-};
-
-const Header = ({ loggedIn, setLoggedIn }) => {
+const Header = () => {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cookies, removeCookie] = useCookies([]);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const verifyCookie = async () => {
+      if (!cookies.token) {
+        navigate('/login');
+      } else {
+        try {
+          const { data } = await axios.post(
+            'http://localhost:4000',
+            {},
+            { withCredentials: true }
+          );
+          const { status, user } = data;
+          setUsername(user);
+          if (!status) {
+            removeCookie('token');
+            navigate('/login');
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    };
+    verifyCookie();
+  }, [cookies, navigate, removeCookie]);
+
+  const handleLogout = () => {
+    removeCookie('token');
+    navigate('/register');
+  };
 
   const closeMenu = () => {
     setMenuOpen(false);
   };
 
   return (
-    <nav className='w-full fixed z-50 top-0 bg-wheat flex items-center justify-between flex-wrap p-6 lg:px-40'>
-      <div className='flex md:text-center justify-center flex-shrink-0'>
-        <span className='font-playfair font-bold text-2xl'>Blogger</span>
-      </div>
-      <div className='block md:hidden'>
-        <MenuIcon isOpen={menuOpen} onClick={() => setMenuOpen(!menuOpen)} />
-      </div>
+    <nav className='w-full fixed z-50 top-0 bg-wheat flex justify-between p-6 lg:px-40'>
+      <span className='font-playfair font-bold text-2xl'>Blogger</span>
       <div
-        className={`w-full block md:flex md:items-center md:w-auto ${
+        className={`md:flex md:items-center md:w-auto ${
           menuOpen ? 'block' : 'hidden'
         }`}
       >
-        <div className='text-md text-center md:flex-grow flex-row justify-end'>
-          {loggedIn ? (
-            <>
-              <NavItem to='/' onClick={closeMenu} children={'Home'} />
-              <NavItem
+        {username ? (
+          <div className='mt-12 md:mt-0 text-center'>
+            <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
+              <Link
+                to='/'
+                className='inline-block hover:scale-110 hover:font-bold'
+                onClick={closeMenu}
+              >
+                Home
+              </Link>
+            </div>
+            <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
+              <Link
                 to='/create'
+                className='inline-block hover:scale-110 hover:font-bold'
                 onClick={closeMenu}
-                children={'Create new post'}
-              />
-              <NavItem to='/logout' onClick={closeMenu} children={'Logout'} />
-            </>
-          ) : (
-            <>
-              <NavItem to='/' onClick={closeMenu} children={'Home'} />
-              <NavItem to='/login' onClick={closeMenu} children={'Login'} />
-              <NavItem
+              >
+                Create Post
+              </Link>
+            </div>
+            <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
+              <Link
+                to='logout'
+                className='inline-block hover:scale-110 hover:font-bold'
+                onClick={() => {
+                  handleLogout();
+                  closeMenu();
+                }}
+              >
+                Logout
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className='mt-12 md:mt-0 text-center'>
+            <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
+              <Link
+                to='/login'
+                className='inline-block hover:scale-110 hover:font-bold'
+                onClick={closeMenu}
+              >
+                Login
+              </Link>
+            </div>
+            <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
+              <Link
                 to='/register'
+                className='inline-block hover:scale-110 hover:font-bold'
                 onClick={closeMenu}
-                children={'Register'}
-              />
-            </>
-          )}
-        </div>
+              >
+                Register
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+      <div className='block md:hidden'>
+        <MenuIcon isOpen={menuOpen} onClick={() => setMenuOpen(!menuOpen)} />
       </div>
     </nav>
   );
