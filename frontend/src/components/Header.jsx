@@ -25,9 +25,8 @@ const NavItem = ({ to, children, onClick }) => {
   );
 };
 
-const Header = () => {
+const Header = ({ loggedIn, setLoggedIn }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const closeMenu = () => {
     setMenuOpen(false);

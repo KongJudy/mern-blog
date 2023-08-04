@@ -21,9 +21,11 @@ module.exports.Register = async (req, res, next) => {
         withCredentials: true,
         httpOnly: false
       });
-      res
-        .status(201)
-        .json({ message: 'User signed in successfully', success: true, user });
+      res.status(201).json({
+        message: 'User signed in successfully',
+        success: true,
+        token
+      });
       next();
     }
   } catch (err) {
@@ -55,7 +57,9 @@ module.exports.Login = async (req, res, next) => {
         withCredentials: true,
         httpOnly: false
       });
-      res.status(201).json({ message: 'Login Successful!', success: true });
+      res
+        .status(201)
+        .json({ message: 'Login Successful!', success: true, token });
       next();
     }
   } catch (err) {

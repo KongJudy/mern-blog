@@ -45,7 +45,7 @@ const Register = () => {
 
   const handleSuccess = (msg) => {
     toast.success(msg, {
-      position: 'bottom-right'
+      position: 'top-right'
     });
   };
 
