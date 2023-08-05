@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 
 // ROUTES
 const authRouter = require('./routes/AuthRouter');
+const postRouter = require('./routes/PostRouter');
 
 const { PORT, MONGO_URL } = process.env;
 
@@ -37,3 +38,4 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use('/', authRouter);
+app.use('/', postRouter);

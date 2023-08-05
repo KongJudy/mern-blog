@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
@@ -33,6 +34,7 @@ const formats = [
 ];
 
 const CreatePost = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [file, setFile] = useState('');
@@ -40,21 +42,22 @@ const CreatePost = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(title);
-    console.log(description);
-    console.log(file);
-    console.log(content);
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('file', file);
+    formData.append('content', content);
 
     axios
-      .post('http://localhost:4000/create', {
-        title,
-        description,
-        file,
-        content
+      .post('http://localhost:4000/create', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
       .then((res) => {
         if (res.data === 'Success') {
-          window.location.href = '/';
+          navigate('/');
         }
       })
       .catch((err) => console.log(err));
@@ -72,7 +75,7 @@ const CreatePost = () => {
           <form onSubmit={handleFormSubmit}>
             <input
               className='block rounded mb-4 p-2 w-full'
-              type='title'
+              type='text'
               name='title'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -80,7 +83,7 @@ const CreatePost = () => {
             />
             <input
               className='block rounded mb-4 p-2 w-full'
-              type='description'
+              type='text'
               name='description'
               value={description}
               onChange={(e) => setDescription(e.target.value)}

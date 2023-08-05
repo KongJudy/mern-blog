@@ -87,7 +87,7 @@ const Login = () => {
             </div>
             <InputItem
               children='Username:'
-              type='username'
+              type='text'
               name='username'
               value={username}
               onChange={handleOnChange}
