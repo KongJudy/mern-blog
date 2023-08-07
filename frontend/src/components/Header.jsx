@@ -21,24 +21,19 @@ const Header = () => {
 
   useEffect(() => {
     const verifyCookie = async () => {
-      if (!cookies.token) {
-        navigate('/login');
-      } else {
-        try {
-          const { data } = await axios.post(
-            'http://localhost:4000',
-            {},
-            { withCredentials: true }
-          );
-          const { status, user } = data;
-          setUsername(user);
-          if (!status) {
-            removeCookie('token');
-            navigate('/login');
-          }
-        } catch (err) {
-          console.log(err);
+      try {
+        const { data } = await axios.post(
+          'http://localhost:4000',
+          {},
+          { withCredentials: true }
+        );
+        const { status, user } = data;
+        setUsername(user);
+        if (!status) {
+          removeCookie('token');
         }
+      } catch (err) {
+        console.log(err);
       }
     };
     verifyCookie();
@@ -46,7 +41,7 @@ const Header = () => {
 
   const handleLogout = () => {
     removeCookie('token');
-    navigate('/register');
+    navigate('/login');
   };
 
   const closeMenu = () => {
@@ -55,7 +50,10 @@ const Header = () => {
 
   return (
     <nav className='w-full fixed z-50 top-0 bg-wheat flex justify-between p-6 lg:px-40'>
-      <span className='font-playfair font-bold text-2xl'>Blogger</span>
+      <Link to='/'>
+        <span className='font-playfair font-bold text-2xl'>Blogger</span>
+      </Link>
+
       <div
         className={`md:flex md:items-center md:w-auto ${
           menuOpen ? 'block' : 'hidden'

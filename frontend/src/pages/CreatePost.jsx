@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
+import { apiHandlers } from '../utils/HandleApi';
+import { ToastContainer, toast } from 'react-toastify';
 
 const modules = {
   toolbar: [
@@ -40,8 +41,20 @@ const CreatePost = () => {
   const [file, setFile] = useState('');
   const [content, setContent] = useState('');
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    const handleError = (err) => {
+      toast.error(err, {
+        position: 'top-right'
+      });
+    };
+
+    const handleSuccess = (msg) => {
+      toast.success(msg, {
+        position: 'top-right'
+      });
+    };
 
     const formData = new FormData();
     formData.append('title', title);
@@ -49,18 +62,19 @@ const CreatePost = () => {
     formData.append('file', file);
     formData.append('content', content);
 
-    axios
-      .post('http://localhost:4000/create', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then((res) => {
-        if (res.data === 'Success') {
+    try {
+      const { success, message } = await apiHandlers.createPost(formData);
+      if (success) {
+        handleSuccess(message);
+        setTimeout(() => {
           navigate('/');
-        }
-      })
-      .catch((err) => console.log(err));
+        }, 1000);
+      } else {
+        handleError(message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -108,6 +122,7 @@ const CreatePost = () => {
               </button>
             </div>
           </form>
+          <ToastContainer />
         </div>
       </div>
     </div>

@@ -10,9 +10,13 @@ module.exports.CreatePost = async (req, res) => {
   const file = req.file ? req.file.filename : null;
 
   try {
-    const post = new Post({ title, description, file, content });
-    await post.save();
-    res.json('Success');
+    if (!title || !description || !content) {
+      return res.json({ message: 'Please fill out all the fields.' });
+    } else {
+      const post = new Post({ title, description, file, content });
+      await post.save();
+      res.status(201).json({ message: 'Post sent!', success: true });
+    }
   } catch (err) {
     res.status(404).json('Error creating post', err);
   }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { apiHandlers } from '../utils/HandleApi';
 
 const InputItem = ({ children, type, name, value, onChange }) => {
   return (
@@ -53,14 +53,7 @@ const Register = () => {
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        'http://localhost:4000/register',
-        {
-          ...inputValues
-        },
-        { withCredentials: true }
-      );
-      const { success, message } = data;
+      const { success, message } = await apiHandlers.register(inputValues);
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
