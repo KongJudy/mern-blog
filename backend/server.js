@@ -39,3 +39,4 @@ app.use(cookieParser());
 app.use(express.json());
 app.use('/', authRouter);
 app.use('/', postRouter);
+app.use('/uploads', express.static('./uploads'));

@@ -37,8 +37,20 @@ export const createPost = async (formData) => {
   }
 };
 
+export const getPosts = async () => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/posts`);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const apiHandlers = {
   login,
   register,
-  createPost
+  createPost,
+  getPosts
 };
+
+export default BASE_URL;
