@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { HiMenuAlt1, HiOutlineX } from 'react-icons/hi';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
+import { apiHandlers } from '../utils/HandleApi';
 
 const MenuIcon = ({ isOpen, onClick }) => {
   return (
@@ -17,31 +17,27 @@ const Header = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookies, removeCookie] = useCookies([]);
-  const [username, setUsername] = useState('');
+  const [user, setUser] = useState('');
 
   useEffect(() => {
-    const verifyCookie = async () => {
+    const fetchUser = async () => {
       try {
-        const { data } = await axios.post(
-          'http://localhost:4000/auth',
-          {},
-          { withCredentials: true }
-        );
-        const { status, user } = data;
-        setUsername(user);
-        if (!status) {
+        const fetchedUser = await apiHandlers.getUser();
+        setUser(fetchedUser.user);
+        if (!fetchedUser.status) {
           removeCookie('token');
         }
       } catch (err) {
         console.log(err);
       }
     };
-    verifyCookie();
-  }, [cookies, navigate, removeCookie]);
+    fetchUser();
+  }, [cookies, removeCookie, navigate]);
 
   const handleLogout = () => {
     removeCookie('token');
     setTimeout(() => {
+      setUser('');
       navigate('/');
     }, 500);
   };
@@ -61,7 +57,7 @@ const Header = () => {
           menuOpen ? 'block' : 'hidden'
         }`}
       >
-        {username ? (
+        {user ? (
           <div className='mt-12 md:mt-0 text-center'>
             <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
               <Link
@@ -82,16 +78,16 @@ const Header = () => {
               </Link>
             </div>
             <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
-              <Link
-                to='logout'
-                className='inline-block hover:scale-110 hover:font-bold'
+              <button
+                to='/'
+                className='inline-block hover:scale-110 hover:font-bold tracking-widest'
                 onClick={() => {
                   handleLogout();
                   closeMenu();
                 }}
               >
                 Logout
-              </Link>
+              </button>
             </div>
           </div>
         ) : (

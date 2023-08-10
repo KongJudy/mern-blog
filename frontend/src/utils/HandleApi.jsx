@@ -50,11 +50,25 @@ export const getPosts = async () => {
   }
 };
 
+export const getUser = async () => {
+  try {
+    const { data } = await axios.post(
+      `${BASE_URL}/auth`,
+      {},
+      { withCredentials: true }
+    );
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const apiHandlers = {
   login,
   register,
   createPost,
-  getPosts
+  getPosts,
+  getUser
 };
 
 export default BASE_URL;
