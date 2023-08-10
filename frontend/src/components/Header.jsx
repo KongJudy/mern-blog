@@ -23,7 +23,7 @@ const Header = () => {
     const verifyCookie = async () => {
       try {
         const { data } = await axios.post(
-          'http://localhost:4000',
+          'http://localhost:4000/auth',
           {},
           { withCredentials: true }
         );
@@ -41,7 +41,9 @@ const Header = () => {
 
   const handleLogout = () => {
     removeCookie('token');
-    navigate('/login');
+    setTimeout(() => {
+      navigate('/');
+    }, 500);
   };
 
   const closeMenu = () => {

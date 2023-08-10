@@ -7,8 +7,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 // ROUTES
-const authRouter = require('./routes/AuthRouter');
-const postRouter = require('./routes/PostRouter');
+const authRouter = require('./routes/auth');
+const postRouter = require('./routes/post');
 
 const { PORT, MONGO_URL } = process.env;
 
@@ -37,6 +37,6 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
-app.use('/', authRouter);
-app.use('/', postRouter);
+app.use('/auth', authRouter);
+app.use('/posts', postRouter);
 app.use('/uploads', express.static('./uploads'));

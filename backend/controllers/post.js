@@ -1,4 +1,4 @@
-const Post = require('../models/PostModel');
+const Post = require('../models/post');
 
 module.exports.GetPosts = async (req, res) => {
   try {
@@ -10,7 +10,7 @@ module.exports.GetPosts = async (req, res) => {
 };
 
 module.exports.CreatePost = async (req, res) => {
-  const { title, description, content, user } = req.body;
+  const { title, description, content } = req.body;
   const file = req.file ? req.file.filename : null;
 
   try {

@@ -4,7 +4,7 @@ const BASE_URL = 'http://localhost:4000';
 
 export const login = async (inputValues) => {
   try {
-    const { data } = await axios.post(`${BASE_URL}/login`, inputValues, {
+    const { data } = await axios.post(`${BASE_URL}/auth/login`, inputValues, {
       withCredentials: true
     });
     return data;
@@ -15,9 +15,13 @@ export const login = async (inputValues) => {
 
 export const register = async (inputValues) => {
   try {
-    const { data } = await axios.post(`${BASE_URL}/register`, inputValues, {
-      withCredentials: true
-    });
+    const { data } = await axios.post(
+      `${BASE_URL}/auth/register`,
+      inputValues,
+      {
+        withCredentials: true
+      }
+    );
     return data;
   } catch (err) {
     console.log(err);
@@ -26,7 +30,7 @@ export const register = async (inputValues) => {
 
 export const createPost = async (formData) => {
   try {
-    const { data } = await axios.post(`${BASE_URL}/create`, formData, {
+    const { data } = await axios.post(`${BASE_URL}/posts/create`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

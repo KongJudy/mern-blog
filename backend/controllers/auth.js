@@ -1,4 +1,4 @@
-const User = require('../models/UserModel');
+const User = require('../models/user');
 const { createSecretToken } = require('../utils/SecretToken');
 const bcrypt = require('bcrypt');
 
@@ -53,6 +53,7 @@ module.exports.Login = async (req, res, next) => {
         res.json({ message: 'Incorrect Password' });
       }
       const token = createSecretToken(user._id);
+      delete user.password;
       res.cookie('token', token, {
         withCredentials: true,
         httpOnly: false
