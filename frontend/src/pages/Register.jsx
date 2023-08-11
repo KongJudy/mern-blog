@@ -74,7 +74,7 @@ const Register = () => {
   };
 
   return (
-    <div className='w-full mx-auto pt-6'>
+    <div className='w-full h-screen mx-auto pt-6'>
       <div className='mt-40 flex justify-center'>
         <div className='md:p-8 md:rounded md:shadow-2xl'>
           <form onSubmit={handleSubmitForm}>

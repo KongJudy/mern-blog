@@ -7,7 +7,7 @@ import CreatePost from './pages/CreatePost';
 
 function App() {
   return (
-    <div className='App bg-classic-gray min-h-screen'>
+    <div className='App bg-classic-gray max-h-max'>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
