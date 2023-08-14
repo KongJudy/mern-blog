@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         'classic-gray': '#e8e5dc',
-        wheat: '#dad2c7',
+        wheat: '#dad2c7e9',
         coffee: '#3b290b'
       },
       dropShadow: {

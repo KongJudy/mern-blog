@@ -32,8 +32,8 @@ const CreatePost = () => {
     formData.append('content', content);
 
     try {
-      const { success, message } = await apiHandlers.createPost(formData);
-      if (success) {
+      const { status, message } = await apiHandlers.createPost(formData);
+      if (status) {
         handleSuccess(message);
         setTimeout(() => {
           navigate('/');

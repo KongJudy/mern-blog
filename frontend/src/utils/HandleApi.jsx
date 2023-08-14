@@ -38,7 +38,7 @@ export const createPost = async (formData) => {
     });
     return data;
   } catch (err) {
-    console.log(err);
+    console.log('Error creating post:', err);
   }
 };
 

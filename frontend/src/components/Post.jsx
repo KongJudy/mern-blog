@@ -14,7 +14,9 @@ const Post = ({ post }) => {
       <div className='mt-4 max-w-[640px] md:max-w-[700px]'>
         <span className='sm:text-2xl text-lg font-bold'>{post.title}</span>
         <p className='text-sm'>
-          <button className='mt-2 mr-4 font-bold'>{post.author}</button>
+          <button className='mt-2 mr-4 font-bold'>
+            {post.author.username}
+          </button>
           <time>{format(new Date(post.createdAt), 'MMM d, yyyy HH:mm')}</time>
         </p>
         <p className='mt-2 sm:text-lg text-sm'>{post.description}</p>
