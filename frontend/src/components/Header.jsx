@@ -78,6 +78,15 @@ const Header = () => {
               </Link>
             </div>
             <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
+              <Link
+                to='/profile'
+                className='inline-block hover:scale-110 hover:font-bold'
+                onClick={closeMenu}
+              >
+                {`${user}`}
+              </Link>
+            </div>
+            <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
               <button
                 to='/'
                 className='inline-block hover:scale-110 hover:font-bold tracking-widest'

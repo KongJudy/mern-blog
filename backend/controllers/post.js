@@ -21,7 +21,8 @@ module.exports.CreatePost = async (req, res) => {
         title,
         description,
         file,
-        content
+        content,
+        author: req.user.username
       });
       await post.save();
       res.status(201).json({ message: 'Post sent!', success: true });

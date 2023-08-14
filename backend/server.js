@@ -1,16 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config();
-
-// MIDDLEWARE
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-// ROUTES
+// ROUTERS
 const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
 
-const { PORT, MONGO_URL } = process.env;
+const { PORT, MONGO_URL, CLIENT_URL } = require('./config');
 
 const app = express();
 
@@ -23,13 +20,15 @@ mongoose
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.log(err));
 
+// LISTEN SERVER
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
 
+// CONNECT WITH FRONTEND
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: CLIENT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   })
@@ -37,6 +36,8 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+app.use('/uploads', express.static('./uploads'));
+
+// ROUTES
 app.use('/auth', authRouter);
 app.use('/posts', postRouter);
-app.use('/uploads', express.static('./uploads'));
