@@ -18,16 +18,16 @@ module.exports.uploadMiddleware = multer({ storage }).single('file');
 
 module.exports.verifiedUser = (req, res, next) => {
   const token = req.cookies.token;
-  if (!token) {
-    return res.json({ status: false, message: 'Must be logged in' });
-  }
+
   jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
     if (err) {
-      return res.json({ status: false });
+      return res.json({
+        status: false,
+        message: 'Must be logged in to create a post'
+      });
     } else {
       const user = await User.findById(data.id);
       if (user) {
-        res.json({ status: true, message: 'Post sent!' });
         req.user = user;
         next();
       } else return res.json({ status: false });

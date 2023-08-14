@@ -15,9 +15,10 @@ module.exports.CreatePost = async (req, res) => {
 
   try {
     if (!title || !description || !content) {
-      return res
-        .status(400)
-        .json({ message: 'Please fill out all the fields.' });
+      return res.json({
+        status: false,
+        message: 'Please fill out all the fields.'
+      });
     }
 
     const post = new Post({
@@ -28,6 +29,7 @@ module.exports.CreatePost = async (req, res) => {
       author: req.user
     });
     await post.save();
+    res.status(201).json({ status: true, message: 'Post sent!' });
   } catch (err) {
     console.error('Error creating post', err);
     res.status(404).json({ message: 'Error while creating the post.' });
