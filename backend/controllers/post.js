@@ -2,7 +2,7 @@ const Post = require('../models/post');
 
 module.exports.GetPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate('author', 'username');
+    const posts = await Post.find().populate('author');
     res.json(posts);
   } catch (err) {
     res.status(404).json('Error getting post', err);
@@ -16,7 +16,6 @@ module.exports.CreatePost = async (req, res) => {
   try {
     if (!title || !description || !content) {
       return res.json({
-        status: false,
         message: 'Please fill out all the fields.'
       });
     }
@@ -33,5 +32,15 @@ module.exports.CreatePost = async (req, res) => {
   } catch (err) {
     console.error('Error creating post', err);
     res.status(404).json({ message: 'Error while creating the post.' });
+  }
+};
+
+module.exports.GetSinglePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const singlePost = await Post.findById(id).populate('author');
+    res.json(singlePost);
+  } catch (err) {
+    console.log(err);
   }
 };

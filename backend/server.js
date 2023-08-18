@@ -25,7 +25,7 @@ app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
 
-// CONNECT WITH FRONTEND
+// CONNECT TO FRONTEND
 app.use(
   cors({
     origin: CLIENT_URL,
@@ -40,4 +40,4 @@ app.use('/uploads', express.static('./uploads'));
 
 // ROUTES
 app.use('/auth', authRouter);
-app.use('/posts', postRouter);
+app.use('/post', postRouter);

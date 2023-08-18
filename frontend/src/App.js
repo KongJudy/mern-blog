@@ -4,16 +4,18 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import CreatePost from './pages/CreatePost';
+import PostPage from './pages/PostPage';
 
 function App() {
   return (
-    <div className='App bg-classic-gray max-h-max'>
+    <div className='App bg-classic-gray w-full h-full'>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/create' element={<CreatePost />} />
+        <Route path='/post/:id' element={<PostPage />} />
       </Routes>
     </div>
   );
