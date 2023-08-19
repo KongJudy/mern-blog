@@ -24,8 +24,6 @@ const Header = () => {
       try {
         const fetchedUser = await apiHandlers.getUser();
         setUser(fetchedUser.user);
-        const token = cookies.token;
-        console.log('Token', token);
         if (!fetchedUser.status) {
           removeCookie('token');
         }
