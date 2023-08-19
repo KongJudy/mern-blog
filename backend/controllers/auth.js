@@ -3,12 +3,11 @@ const { createSecretToken } = require('../utils/SecretToken');
 const bcrypt = require('bcrypt');
 
 // REGISTER
-module.exports.Register = async (req, res) => {
+module.exports.Register = async (req, res, next) => {
   try {
     const { email, username, password, createdAt } = req.body;
     const existingEmail = await User.findOne({ email });
     const existingUser = await User.findOne({ username });
-
     if (existingEmail) {
       return res.json({ message: 'Email already exists!' });
     }
@@ -26,6 +25,7 @@ module.exports.Register = async (req, res) => {
         success: true,
         token
       });
+      next();
     }
   } catch (err) {
     console.log(err);
@@ -33,7 +33,7 @@ module.exports.Register = async (req, res) => {
 };
 
 // LOGIN
-module.exports.Login = async (req, res) => {
+module.exports.Login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
@@ -60,6 +60,7 @@ module.exports.Login = async (req, res) => {
       res
         .status(201)
         .json({ message: 'Login Successful!', success: true, token });
+      next();
     }
   } catch (err) {
     console.log(err);

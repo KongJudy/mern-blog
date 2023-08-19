@@ -22,7 +22,7 @@ const PostPage = () => {
 
   return (
     <div className='flex justify-center h-full'>
-      <div className='mt-20'>
+      <div className='mt-20 pb-20'>
         {postInfo && (
           <div className='mt-10 max-w-[640px] md:max-w-[800px] h-2/3'>
             <div className='flex justify-center my-2'>

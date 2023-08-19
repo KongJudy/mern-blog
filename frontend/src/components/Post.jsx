@@ -3,13 +3,15 @@ import BASE_URL from '../utils/HandleApi';
 import { format } from 'date-fns';
 
 const Post = ({ post }) => {
+  const lessContent = post.content.slice(0, 200);
+
   return (
-    <div className='mb-6 col-span-3'>
-      <div className='max-w-[640px] md:max-w-[700px] h-2/3'>
+    <div className='mb-6 col-span-3 max-w-[640px] md:max-w-[700px] h-2/3'>
+      <div className=''>
         <Link to={`/post/${post._id}`}>
           <img
             src={`${BASE_URL}/uploads/` + post.file}
-            className='rounded drop-shadow-md object-cover w-full h-full'
+            className='rounded drop-shadow-md object-cover w-full h-[400px]'
             alt='post'
           />
         </Link>
@@ -25,7 +27,7 @@ const Post = ({ post }) => {
         <p className='mt-2 sm:text-lg text-sm'>{post.description}</p>
       </div>
       <div className='mt-2'>
-        <p>{post.content}</p>
+        <p>{lessContent} ...</p>
       </div>
     </div>
   );
