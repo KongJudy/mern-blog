@@ -3,7 +3,7 @@ import BASE_URL from '../utils/HandleApi';
 import { format } from 'date-fns';
 
 const Post = ({ post }) => {
-  const lessContent = post.content.slice(0, 200);
+  const lessContent = post.content.slice(0, 190);
 
   return (
     <div className='mb-6 col-span-3 max-w-[640px] md:max-w-[700px] pb-4'>
@@ -27,7 +27,14 @@ const Post = ({ post }) => {
         <p className='mt-2 sm:text-lg text-sm'>{post.description}</p>
       </div>
       <div className='mt-2'>
-        <p>{lessContent} ...</p>
+        <p className='leading-6'>
+          {lessContent}
+          <Link to={`/post/${post._id}`}>
+            <span className='ml-2 border-b-2 border-coffee font-bold'>
+              Read More
+            </span>
+          </Link>
+        </p>
       </div>
     </div>
   );
