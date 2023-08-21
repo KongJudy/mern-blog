@@ -30,7 +30,7 @@ export const register = async (inputValues) => {
 
 export const createPost = async (formData) => {
   try {
-    const { data } = await axios.post(`${BASE_URL}/post/create`, formData, {
+    const { data } = await axios.post(`${BASE_URL}/posts/create`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
@@ -44,7 +44,7 @@ export const createPost = async (formData) => {
 
 export const getPosts = async () => {
   try {
-    const { data } = await axios.get(`${BASE_URL}/post`);
+    const { data } = await axios.get(`${BASE_URL}/posts`);
     return data;
   } catch (err) {
     console.log(err);
@@ -78,8 +78,7 @@ export const apiHandlers = {
   register,
   createPost,
   getPosts,
-  getUser,
-  getSinglePost
+  getUser
 };
 
 export default BASE_URL;
