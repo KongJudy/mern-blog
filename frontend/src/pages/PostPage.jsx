@@ -21,7 +21,7 @@ const PostPage = () => {
   }, [id]);
 
   return (
-    <div className='flex justify-center h-full'>
+    <div className='flex justify-center'>
       <div className='mt-20 pb-20'>
         {postInfo && (
           <div className='mt-10 max-w-[640px] md:max-w-[800px] h-2/3'>
@@ -41,7 +41,7 @@ const PostPage = () => {
             <div className='border-2'>
               <img
                 src={`${BASE_URL}/uploads/` + postInfo.file}
-                className='rounded drop-shadow-md object-fill w-screen max-h-[280px]'
+                className='rounded drop-shadow-md object-fill w-full max-h-[280px]'
                 alt='post'
               />
             </div>

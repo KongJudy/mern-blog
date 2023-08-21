@@ -47,7 +47,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className='w-full h-screen  mx-auto p-6'>
+    <div className='mx-auto p-6'>
       <div className='flex justify-center'>
         <div className='mt-28 lg:mx-40 w-full p-2 md:w-5/6 lg:w-1/2'>
           <div className='text-center mb-8'>

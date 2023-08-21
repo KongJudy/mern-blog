@@ -6,7 +6,7 @@ const Post = ({ post }) => {
   const lessContent = post.content.slice(0, 200);
 
   return (
-    <div className='mb-6 col-span-3 max-w-[640px] md:max-w-[700px] h-2/3'>
+    <div className='mb-6 col-span-3 max-w-[640px] md:max-w-[700px] pb-4'>
       <div className=''>
         <Link to={`/post/${post._id}`}>
           <img

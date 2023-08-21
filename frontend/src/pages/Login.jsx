@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { apiHandlers } from '../utils/HandleApi';
+import { UserContext } from '../utils/UserContext';
 
 const InputItem = ({ children, type, name, value, onChange }) => {
   return (
@@ -20,6 +21,7 @@ const InputItem = ({ children, type, name, value, onChange }) => {
 
 const Login = () => {
   const navigate = useNavigate();
+  const { userInfo, setUserInfo } = useContext(UserContext);
   const [inputValues, setInputValues] = useState({
     username: '',
     password: ''
@@ -53,6 +55,7 @@ const Login = () => {
       const { success, message } = await apiHandlers.login(inputValues);
       if (success) {
         handleSuccess(message);
+        setUserInfo(userInfo);
         setTimeout(() => {
           navigate('/');
         }, 1000);
