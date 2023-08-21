@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { HiMenuAlt1, HiOutlineX } from 'react-icons/hi';
 import { useCookies } from 'react-cookie';
 import { apiHandlers } from '../utils/HandleApi';
+import { UserContext } from '../utils/UserContext';
 
 const MenuIcon = ({ isOpen, onClick }) => {
   return (
@@ -15,6 +16,7 @@ const MenuIcon = ({ isOpen, onClick }) => {
 
 const Header = () => {
   const navigate = useNavigate();
+  const { userInfo, setUserInfo } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookies, removeCookie] = useCookies([]);
   const [user, setUser] = useState('');
@@ -32,12 +34,12 @@ const Header = () => {
       }
     };
     fetchUser();
-  }, [cookies, removeCookie, navigate]);
+  }, [cookies, removeCookie, navigate, setUserInfo]);
 
   const handleLogout = () => {
     removeCookie('token');
     setTimeout(() => {
-      setUser('');
+      setUserInfo(null);
       navigate('/');
     }, 500);
   };
@@ -83,7 +85,7 @@ const Header = () => {
                 className='inline-block hover:scale-110 hover:font-bold'
                 onClick={closeMenu}
               >
-                {`${user}`}
+                {`${userInfo}`}
               </Link>
             </div>
             <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
