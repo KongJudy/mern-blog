@@ -8,11 +8,9 @@ module.exports.GetPosts = async (req, res) => {
     res.status(404).json('Error getting post', err);
   }
 };
-
 module.exports.CreatePost = async (req, res) => {
   const { title, description, content } = req.body;
   const file = req.file ? req.file.filename : null;
-
   try {
     if (!title || !description || !content) {
       return res.json({
@@ -20,13 +18,12 @@ module.exports.CreatePost = async (req, res) => {
         message: 'Please fill out all the fields.'
       });
     }
-
     const post = new Post({
       title,
       description,
       file,
       content,
-      author: req.user
+      author: req.user._id
     });
     await post.save();
     res.status(201).json({ status: true, message: 'Post sent!' });

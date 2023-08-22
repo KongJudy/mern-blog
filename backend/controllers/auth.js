@@ -8,7 +8,6 @@ module.exports.Register = async (req, res, next) => {
     const { email, username, password, createdAt } = req.body;
     const existingEmail = await User.findOne({ email });
     const existingUser = await User.findOne({ username });
-
     if (existingEmail) {
       return res.json({ message: 'Email already exists!' });
     }

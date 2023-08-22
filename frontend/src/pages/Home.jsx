@@ -21,7 +21,7 @@ const Home = () => {
     <div className='flex justify-center pb-12'>
       <div className='mt-24 mx-2 lg:grid grid-cols-6 gap-20 lg:mx-40'>
         {posts.map((post) => (
-          <Post key={post._id} post={post} />
+          <Post key={post._id} post={post} author={post.author} />
         ))}
       </div>
     </div>
