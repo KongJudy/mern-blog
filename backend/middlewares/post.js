@@ -16,23 +16,27 @@ const storage = multer.diskStorage({
 
 module.exports.uploadMiddleware = multer({ storage }).single('file');
 
-module.exports.verifiedUser = (req, res, next) => {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.json({
-      status: false,
-      message: 'Must be logged in to create a post'
-    });
-  }
-  jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
-    if (err) {
-      return res.json({ status: false });
-    } else {
-      const user = await User.findById(data.id);
-      if (user) {
-        req.user = user;
-        next();
-      } else return res.json({ status: false });
+module.exports.verifiedUser = async (req, res, next) => {
+  try {
+    const token = req.headers['authorization'];
+
+    if (!token) {
+      return res.json({
+        status: false,
+        message: 'Must be logged in to create a post'
+      });
     }
-  });
+
+    const decodedToken = jwt.verify(token, process.env.TOKEN_KEY);
+    const user = await User.findById(decodedToken.id);
+
+    if (user) {
+      req.user = user;
+      next();
+    } else {
+      return res.json({ status: false });
+    }
+  } catch (err) {
+    return res.json({ status: false, message: err.message });
+  }
 };

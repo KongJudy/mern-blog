@@ -11,6 +11,7 @@ module.exports.GetPosts = async (req, res) => {
 module.exports.CreatePost = async (req, res) => {
   const { title, description, content } = req.body;
   const file = req.file ? req.file.filename : null;
+
   try {
     if (!title || !description || !content) {
       return res.json({
@@ -23,12 +24,12 @@ module.exports.CreatePost = async (req, res) => {
       description,
       file,
       content,
-      author: req.user._id
+      author: req.user
     });
     await post.save();
     res.status(201).json({ status: true, message: 'Post sent!' });
   } catch (err) {
-    console.error('Error creating post', err);
+    console.log('Error creating post', err);
     res.status(404).json({ message: 'Error while creating the post.' });
   }
 };

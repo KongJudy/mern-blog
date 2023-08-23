@@ -7,6 +7,7 @@ export const login = async (inputValues) => {
     const { data } = await axios.post(`${BASE_URL}/auth/login`, inputValues, {
       withCredentials: true
     });
+    localStorage.setItem('token', data?.token);
     return data;
   } catch (err) {
     console.log(err);
@@ -22,19 +23,21 @@ export const register = async (inputValues) => {
         withCredentials: true
       }
     );
+    localStorage.setItem('token', data?.token);
     return data;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const createPost = async (formData) => {
+export const CreatePost = async (formData) => {
+  const token = localStorage.getItem('token') || '';
+
   try {
     const { data } = await axios.post(`${BASE_URL}/post/create`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
-      },
-      withCredentials: true
+        authorization: token
+      }
     });
     return data;
   } catch (err) {
@@ -76,7 +79,7 @@ export const getSinglePost = async (id) => {
 export const apiHandlers = {
   login,
   register,
-  createPost,
+  CreatePost,
   getPosts,
   getUser,
   getSinglePost

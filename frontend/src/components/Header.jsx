@@ -36,10 +36,12 @@ const Header = () => {
 
   const handleLogout = () => {
     removeCookie('token');
+    localStorage.removeItem('token');
+
     setTimeout(() => {
       setUser('');
-      navigate('/');
-    }, 500);
+      window.location.pathname = '/';
+    }, 300);
   };
 
   const closeMenu = () => {

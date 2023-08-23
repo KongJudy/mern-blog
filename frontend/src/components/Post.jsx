@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import BASE_URL from '../utils/HandleApi';
 import { format } from 'date-fns';
 
-const Post = ({ post, author }) => {
-  console.log(author);
+const Post = ({ post }) => {
   const lessContent = post.content.slice(0, 190);
 
   return (
@@ -22,7 +21,7 @@ const Post = ({ post, author }) => {
           <span className='sm:text-2xl text-lg font-bold'>{post.title}</span>
         </Link>
         <div className='text-sm'>
-          {/* <p className='mt-2 mr-4 font-bold'>{post.author.username}</p> */}
+          <p className='mt-2 mr-4 font-bold'>{post.author.username}</p>
           <time>{format(new Date(post.createdAt), 'MMM d, yyyy HH:mm')}</time>
         </div>
         <p className='mt-2 sm:text-lg text-sm'>{post.description}</p>
