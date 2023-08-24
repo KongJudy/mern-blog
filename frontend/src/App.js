@@ -8,7 +8,7 @@ import PostPage from './pages/PostPage';
 
 function App() {
   return (
-    <div className='App bg-classic-gray w-full h-full'>
+    <div className='App'>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />

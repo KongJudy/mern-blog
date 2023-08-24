@@ -41,7 +41,7 @@ const PostPage = () => {
             <div className='border-2'>
               <img
                 src={`${BASE_URL}/uploads/` + postInfo.file}
-                className='rounded drop-shadow-md object-fill w-full max-h-[280px]'
+                className='rounded drop-shadow-md object-fill w-[640px] max-h-[280px]'
                 alt='post'
               />
             </div>

@@ -57,7 +57,7 @@ const CreatePost = () => {
           </div>
           <form onSubmit={handleFormSubmit}>
             <input
-              className='block rounded mb-4 p-2 w-full'
+              className='block rounded mb-4 p-2 w-full bg-classic-gray'
               type='text'
               name='title'
               value={title}
@@ -65,7 +65,7 @@ const CreatePost = () => {
               placeholder={'Title'}
             />
             <input
-              className='block rounded mb-4 p-2 w-full'
+              className='block rounded mb-4 p-2 w-full bg-classic-gray'
               type='text'
               name='description'
               value={description}
@@ -73,13 +73,13 @@ const CreatePost = () => {
               placeholder={'Description'}
             />
             <input
-              className='mb-4 w-full'
+              className='mb-4 w-full '
               type='file'
               onChange={(e) => setFile(e.target.files[0])}
             />
             <div className='h-48 md:h-80'>
               <textarea
-                className='rounded p-2 w-full h-full'
+                className='rounded p-2 w-full h-full bg-classic-gray'
                 placeholder='Content'
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>

@@ -49,7 +49,7 @@ const Header = () => {
   };
 
   return (
-    <nav className='w-full fixed z-50 top-0 bg-wheat flex justify-between p-6 lg:px-40'>
+    <nav className='w-full fixed z-50 top-0 bg-classic-gray flex justify-between p-6 lg:px-40'>
       <Link to='/'>
         <span className='font-playfair font-bold text-2xl'>Blogger</span>
       </Link>

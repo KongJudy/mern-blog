@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'classic-gray': '#e8e5dc',
+        'classic-gray': '#e8e5dce1',
         wheat: '#dad2c7e9',
-        coffee: '#3b290b'
+        coffee: '#604311'
       },
       dropShadow: {
         sm: '0 2px 2px rgba(0, 0, 0, 0.317)',
