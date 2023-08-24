@@ -32,7 +32,7 @@ const CreatePost = () => {
     formData.append('content', content);
 
     try {
-      const { status, message } = await apiHandlers.CreatePost(formData);
+      const { status, message } = await apiHandlers.createPost(formData);
       if (status) {
         handleSuccess(message);
         setTimeout(() => {

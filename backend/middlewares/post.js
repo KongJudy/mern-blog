@@ -3,6 +3,7 @@ const path = require('path');
 const User = require('../models/user');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const Post = require('../models/post');
 
 // STORES FILE INTO UPLOADS FOLDER
 const storage = multer.diskStorage({

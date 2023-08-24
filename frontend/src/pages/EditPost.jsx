@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { apiHandlers } from '../utils/HandleApi';
 import { ToastContainer, toast } from 'react-toastify';
+import BASE_URL from '../utils/HandleApi';
 
 const EditPost = () => {
   const { id } = useParams();
@@ -10,21 +11,23 @@ const EditPost = () => {
   const [description, setDescription] = useState('');
   const [file, setFile] = useState('');
   const [content, setContent] = useState('');
+  const [cover, setCover] = useState('');
 
   useEffect(() => {
     const fetchPostId = async () => {
       try {
-        const fetchedPostId = await apiHandlers.getPostId();
+        const fetchedPostId = await apiHandlers.getSinglePost(id);
         setTitle(fetchedPostId.title);
         setDescription(fetchedPostId.description);
         setFile(fetchedPostId.file);
+        setCover(fetchedPostId.file);
         setContent(fetchedPostId.content);
       } catch (err) {
         console.log(err);
       }
     };
     fetchPostId();
-  }, []);
+  }, [id]);
 
   const handleUpdateForm = async (e) => {
     e.preventDefault();
@@ -48,7 +51,7 @@ const EditPost = () => {
     formData.append('content', content);
 
     try {
-      const { status, message } = await apiHandlers.EditPost;
+      const { status, message } = await apiHandlers.editPost(formData, id);
       if (status) {
         handleSuccess(message);
         setTimeout(() => {
@@ -91,12 +94,20 @@ const EditPost = () => {
             <input
               className='mb-4 w-full '
               type='file'
+              name='file'
               onChange={(e) => setFile(e.target.files[0])}
+            />
+            <img
+              src={`${BASE_URL}/uploads/${cover}`}
+              alt='current'
+              className='mb-4 rounded max-h-32'
             />
             <div className='h-48 md:h-80'>
               <textarea
                 className='rounded p-2 w-full h-full bg-classic-gray'
                 placeholder='Content'
+                name='content'
+                value={content}
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>
             </div>

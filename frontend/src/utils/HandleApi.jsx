@@ -30,7 +30,7 @@ export const register = async (inputValues) => {
   }
 };
 
-export const CreatePost = async (formData) => {
+export const createPost = async (formData) => {
   const token = localStorage.getItem('token') || '';
 
   try {
@@ -76,23 +76,29 @@ export const getSinglePost = async (id) => {
   }
 };
 
-export const getPostId = async (id) => {
+export const editPost = async (formData, id) => {
+  const token = localStorage.getItem('token') || '';
+
   try {
-    const { data } = await axios.get(`${BASE_URL}/post/edit/${id}`);
+    const { data } = await axios.put(`${BASE_URL}/post/edit/${id}`, formData, {
+      headers: {
+        authorization: token
+      }
+    });
     return data;
   } catch (err) {
-    console.log(err);
+    console.log('Error creating post:', err);
   }
 };
 
 export const apiHandlers = {
   login,
   register,
-  CreatePost,
+  createPost,
   getPosts,
   getUser,
   getSinglePost,
-  getPostId
+  editPost
 };
 
 export default BASE_URL;
