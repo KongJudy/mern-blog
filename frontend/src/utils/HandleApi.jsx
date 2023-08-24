@@ -76,13 +76,23 @@ export const getSinglePost = async (id) => {
   }
 };
 
+export const getPostId = async (id) => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/post/edit/${id}`);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const apiHandlers = {
   login,
   register,
   CreatePost,
   getPosts,
   getUser,
-  getSinglePost
+  getSinglePost,
+  getPostId
 };
 
 export default BASE_URL;
