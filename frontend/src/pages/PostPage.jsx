@@ -72,7 +72,7 @@ const PostPage = () => {
                         />
                       </svg>
 
-                      <span className='bg-wheat p-1 px-2 rounded font-bold'>
+                      <span className='bg-wheat p-1 px-3 rounded-full font-bold hover:bg-coffee hover:text-white'>
                         Edit Post
                       </span>
                     </div>
@@ -83,10 +83,10 @@ const PostPage = () => {
                 {format(new Date(postInfo.createdAt), 'MMM d, yyyy HH:mm')}
               </time>
             </div>
-            <div className='border-2'>
+            <div className='border-2 md:max-w-[800px]'>
               <img
                 src={`${BASE_URL}/uploads/` + postInfo.file}
-                className='rounded drop-shadow-md object-fill w-[640px] max-h-[280px]'
+                className='rounded drop-shadow-md object-fill w-full max-h-[280px]'
                 alt='post'
               />
             </div>

@@ -8,7 +8,7 @@ const InputItem = ({ children, type, name, value, onChange }) => {
     <div className='text-left md:text-right'>
       <label className='block my-2 md:inline-block font-bold'>{children}</label>
       <input
-        className='mb-4 p-2 md:mx-3 rounded h-10 w-full md:w-80 hover:drop-shadow-sm'
+        className='mb-4 p-2 md:mx-3 rounded-full h-10 w-full md:w-80 hover:drop-shadow-sm border-2 border-wheat'
         type={type}
         name={name}
         value={value}
@@ -105,14 +105,14 @@ const Register = () => {
             <div className='text-right md:mr-3'>
               <button
                 type='submit'
-                className='bg-white px-4 py-2 rounded hover:font-bold tracking-wider shadow-md hover:drop-shadow-sm'
+                className='bg-white px-4 py-2 rounded-full hover:font-bold tracking-wider shadow-md hover:drop-shadow-sm border-2 border-wheat'
               >
                 Register
               </button>
               <div className='pt-4'>
                 <span className='text-sm'>
                   Already a member? Click{' '}
-                  <Link to='/login' className='font-semibold hover:font-bold'>
+                  <Link to='/login' className='font-semibold hover:font-bold '>
                     Login
                   </Link>
                 </span>

@@ -81,7 +81,7 @@ const Header = () => {
             </div>
             <div className='block mt-4 md:inline-block md:mt-0 md:mr-8'>
               <Link
-                to='/profile'
+                to={`/posts/${user}`}
                 className='inline-block hover:scale-110 hover:font-bold'
                 onClick={closeMenu}
               >

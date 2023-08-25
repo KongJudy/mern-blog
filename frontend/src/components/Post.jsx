@@ -30,7 +30,7 @@ const Post = ({ post }) => {
         <p className='leading-6'>
           {lessContent}
           <Link to={`/post/${post._id}`}>
-            <span className='ml-2 bg-wheat p-1 px-2 rounded font-bold'>
+            <span className='ml-2 bg-wheat p-1 px-3 rounded-full font-bold hover:text-white hover:bg-coffee'>
               Read More
             </span>
           </Link>

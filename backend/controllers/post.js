@@ -71,3 +71,18 @@ module.exports.EditPost = async (req, res) => {
     res.status(404).json({ message: 'Error editing post' });
   }
 };
+
+module.exports.GetMyPosts = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const posts = await Post.find({ author: userId });
+
+    res.json({ status: true, posts });
+  } catch (err) {
+    console.log('Error fetching user posts', err);
+    res
+      .status(404)
+      .json({ status: false, message: 'Error fetching user posts' });
+  }
+};

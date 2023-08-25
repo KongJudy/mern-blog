@@ -112,7 +112,7 @@ const EditPost = () => {
               ></textarea>
             </div>
             <div className='mt-4'>
-              <button className='p-2 w-full border-2 border-coffee rounded md:p-2 hover:font-bold'>
+              <button className='p-2 w-full border-2 border-coffee rounded-full md:p-2 hover:font-bold'>
                 Update Post
               </button>
             </div>

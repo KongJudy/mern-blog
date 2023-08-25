@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import CreatePost from './pages/CreatePost';
 import PostPage from './pages/PostPage';
 import EditPost from './pages/EditPost';
+import UserPosts from './pages/UserPosts';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/create' element={<CreatePost />} />
         <Route path='/post/:id' element={<PostPage />} />
         <Route path='/edit/:id' element={<EditPost />} />
+        <Route path='/posts/:userId' element={<UserPosts />} />
       </Routes>
     </div>
   );

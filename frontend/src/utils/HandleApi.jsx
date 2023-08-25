@@ -91,6 +91,22 @@ export const editPost = async (formData, id) => {
   }
 };
 
+export const getUserPosts = async (id) => {
+  const token = localStorage.getItem('token') || '';
+
+  try {
+    const { data } = await axios.get(`${BASE_URL}/post/my-posts/${id}`, {
+      headers: {
+        authorization: token
+      }
+    });
+    console.log('data:', data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const apiHandlers = {
   login,
   register,
@@ -98,7 +114,8 @@ export const apiHandlers = {
   getPosts,
   getUser,
   getSinglePost,
-  editPost
+  editPost,
+  getUserPosts
 };
 
 export default BASE_URL;
