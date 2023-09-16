@@ -27,14 +27,14 @@ const Post = ({ post }) => {
         <p className='mt-2 sm:text-lg text-sm'>{post.description}</p>
       </div>
       <div className='mt-2'>
-        <p className='leading-6'>
-          {lessContent}
+        <p className='leading-6'>{lessContent}...</p>
+        <div className='text-right'>
           <Link to={`/post/${post._id}`}>
             <span className='ml-2 bg-wheat p-1 px-3 rounded-full font-bold hover:text-white hover:bg-coffee'>
               Read More
             </span>
           </Link>
-        </p>
+        </div>
       </div>
     </div>
   );
