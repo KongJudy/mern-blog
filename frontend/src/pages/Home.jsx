@@ -4,6 +4,7 @@ import { apiHandlers } from '../utils/HandleApi';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -12,12 +13,14 @@ const Home = () => {
         setPosts(fetchedPosts);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchPosts();
   }, []);
 
-  if (!posts) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className='flex justify-center pb-12'>
