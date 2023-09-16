@@ -17,6 +17,8 @@ const Home = () => {
     fetchPosts();
   }, []);
 
+  if (!posts) return <div>Loading...</div>;
+
   return (
     <div className='flex justify-center pb-12'>
       <div className='mt-24 mx-2 lg:grid grid-cols-6 gap-20 lg:mx-40'>
